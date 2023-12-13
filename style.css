@@ -78,8 +78,13 @@ h2 {
 
     transition: 200ms;
 }
-
-.buttons:hover, .buttons:focus {
+.correct {
+    background-color: green;
+}
+.wrong {
+    background-color: red;
+}
+.buttons:hover{
     background-color: #48aaff;
     color: white;
     transform: scale(1.05);
