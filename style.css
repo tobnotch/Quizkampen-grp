@@ -13,6 +13,7 @@ body {
     justify-content: space-between;
     align-items: center;
 }
+
 footer {
     text-align: center;
     justify-self: flex-end;
@@ -21,6 +22,7 @@ footer {
     width: 100%;
     border-top: 2px solid black;
 }
+
 h1 {
     font-family: 'Bungee Spice', sans-serif;
     font-size: 2.5em;
@@ -34,24 +36,24 @@ h2 {
     background-color: white;
     border: 3px solid #50a2ff51;
     border-radius: 10px;
-    max-width: 450px;
+    width: 450px;
+    height: 300px;
     padding: 15px 10px;
-
-    display: flex;
-    flex-direction: column;
-}
-
-.question-container {
+    border-top: 1px solid #c8e5ff;
+    border-bottom: 1px solid #c8e5ff;
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
-.question-container p {
-    border-top: 1px solid #c8e5ff;
-    border-bottom: 1px solid #c8e5ff;
-    padding: 10px 0;
-    margin: 10px 0 16px 0;
+.question {
+  border-top: 1px solid #c8e5ff;
+  border-bottom: 1px solid #c8e5ff;
+  padding: 15px 20px;
+  margin: 10px 0 16px 0;
+  font-weight: bold;
+  font-size: 18px;
+  line-height: 20px;
 }
 
 .button-container {
@@ -60,7 +62,8 @@ h2 {
     justify-content: space-evenly;
 }
 
-.buttons {
+.buttons,
+.play-again-button {
     font-family: 'Open Sans', sans-serif;
     border: 2px solid #48aaff;
     border-radius: 10px;
@@ -73,29 +76,24 @@ h2 {
     width: 200px;
     height: 75px;
     
-    /* overflow: hidden;
-    text-overflow: ellipsis; */
-
     transition: 200ms;
 }
 
-.buttons:hover, .buttons:focus {
+.play-again-button-container {
+  display: flex;
+  height: 190px;
+  width: 450px;
+  align-items: center;
+}
+
+.buttons:hover,
+.play-again-button:hover, 
+.buttons:focus, 
+.play-again-button:focus {
     background-color: #48aaff;
     color: white;
     transform: scale(1.05);
     box-shadow: 0 0.5em 0.7em -0.4em #48aaff;
-}
-
-/* styles för start sidan */
-.start-screen {
-    background-color: white;
-    border: 3px solid #50a2ff51;
-    border-radius: 10px;
-    max-width: 450px;
-    padding: 15px 10px;
-
-    display: flex;
-    flex-direction: column;
 }
 
 /* styles för start sidan */
@@ -108,10 +106,33 @@ h2 {
 /* styles för start sidan */
 .welcome {
     font-size: 2em;
+    font-weight: bold;
 }
 
 @media (min-width: 768px) {
     h1 {
         font-size: 3.5em;
     }
+}
+
+.buttons.correct {
+  background-color: #4CAF50; 
+}
+
+.buttons.incorrect {
+  background-color: #f44336; 
+}
+
+.buttons.flash-correct {
+  background-color: #4CAF50; 
+  animation: flash 1s ease-in-out infinite; 
+}
+
+@keyframes flash {
+  0%, 50%, 100% {
+    opacity: 1;
+  }
+  25%, 75% {
+    opacity: 0;
+  }
 }
