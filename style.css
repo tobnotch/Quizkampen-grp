@@ -1,6 +1,7 @@
 html {
     box-sizing: border-box;
     font-family: 'Open Sans', sans-serif;
+    font-size: 15px;
 }
 
 body {
@@ -23,28 +24,46 @@ footer {
 }
 h1 {
     font-family: 'Bungee Spice', sans-serif;
-    font-size: 2.5em;
+    font-size: 50px;
 }
 
 h2 {
     margin: 15px 0;
 }
-
+img {
+    width: 50%;
+    height: 45%;
+    border: 1px solid black;
+}
+.logo {
+    padding-top: 10px;
+}
 .quiz-container {
     background-color: white;
     border: 3px solid #50a2ff51;
     border-radius: 10px;
-    max-width: 450px;
     padding: 15px 10px;
-
+    /*max-height: 85vh;*/
     display: flex;
     flex-direction: column;
-}
+    width: 60%;
+    height: 45%;
+    margin: 10px;
 
+}
+.question-counter {
+    font-size: 2rem;
+    font-weight: bold;
+}
+.question-text {
+    font-size: 1.5rem;
+    text-align: center;
+}
 .question-container {
     display: flex;
     flex-direction: column;
     align-items: center;
+    margin-bottom: 1rem;
 }
 
 .question-container p {
@@ -58,6 +77,8 @@ h2 {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-evenly;
+    padding-top: 8px;
+    border-top: 1px solid #c8e5ff;
 }
 
 .buttons {
@@ -65,14 +86,17 @@ h2 {
     border: 2px solid #48aaff;
     border-radius: 10px;
     color: #348efe;
-    font-size: 1em;
-    font-weight: 600;
+    font-size: 1.2rem;
+    font-weight: bold;
     padding: 20px 50px;
     margin: 10px 0;
 
     width: 200px;
     height: 75px;
-    
+    flex-grow: 1;
+    min-width: 45%;
+    margin:10px;
+
     /* overflow: hidden;
     text-overflow: ellipsis; */
 
@@ -80,13 +104,21 @@ h2 {
 }
 .correct {
     background-color: green;
+    color: white;
 }
 .wrong {
     background-color: red;
+    color: white;
+}
+.message {
+    text-align: center;
+    font-size: 2rem;
+    font-weight: bold;
 }
 .buttons:hover{
-    background-color: #48aaff;
-    color: white;
+    opacity: 90%;
+    /*background-color: #48aaff;
+    color: white;*/
     transform: scale(1.05);
     box-shadow: 0 0.5em 0.7em -0.4em #48aaff;
 }
@@ -108,15 +140,179 @@ h2 {
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: center;
+    text-align: center;
 }
 
 /* styles för start sidan */
 .welcome {
     font-size: 2em;
 }
+.difficulty-selection {
+    justify-self: center;
+    align-self: center;
+    text-align: center;
+    margin: 10px;
+}
+.difficulty-selection p {
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+.progressbar {
+    width: 90%;
+    margin: 5px auto;
+    border: solid 1px #000;
+  }
+  .progressbar .inner {
+    height: 15px;
+    animation: progressbar-countdown;
+    /* Placeholder, this will be updated using javascript */
+    animation-duration: 5s;
+    /* We stop in the end */
+    animation-iteration-count: 1;
+    /* Stay on pause when the animation is finished finished */
+    animation-fill-mode: forwards;
+    /* We start paused, we start the animation using javascript */
+    animation-play-state: paused;
+    /* We want a linear animation, ease-out is standard */
+    animation-timing-function: linear;
+  }
+  @keyframes progressbar-countdown {
+    0% {
+      width: 100%;
+      background: #0F0;
+    }
+    100% {
+      width: 0%;
+      background: #F00;
+    }
+  }
+  
 
 @media (min-width: 768px) {
     h1 {
         font-size: 3.5em;
     }
 }
+
+@media screen and (max-width: 500px) {
+    html {
+        font-size: 15px;
+    }
+    .quiz-container {
+        width: 90%;
+        height: 90%;
+        margin: 10px;
+    }
+    img {
+        width: 80%;
+    }
+    #main-container > div button {
+        width: 90%;
+    }
+}
+@media screen and (min-width: 501px) and (max-width: 768px) {
+    html {
+        font-size: 13px;
+    }
+    .quiz-container {
+        width: 90%;
+        height: 90%;
+        margin: 10px;
+    }
+    /* .button-container {
+        display: grid;
+        justify-items: center;
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: 1fr 1fr;
+        gap: 5px;
+    } */
+    .buttons {
+        flex-grow: 1;
+        min-width: 45%;
+        margin:10px;
+    }
+
+    img {
+        width: 90%;
+    }
+}
+@media screen and (min-width: 769px) and (max-width: 1024px) {
+    html {
+        font-size: 14px;
+    }
+    .quiz-container {
+        width: 75%;
+        height: 75%;
+        margin: 10px;
+    }
+    /* .button-container {
+        display: grid;
+        justify-items: center;
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: 1fr 1fr;
+        gap: 5px;
+    } */
+    img {
+        width: 85%;
+    }
+    .buttons {
+        flex-grow: 1;
+        min-width: 45%;
+        margin:10px;
+    }
+}
+@media screen and (min-width: 1025px) and (max-width: 1200px) {
+    html {
+        font-size: 16px;
+    }
+    .quiz-container {
+        width: 75%;
+        height: 75%;
+        margin: 10px;
+    }
+    .button-container {
+        width: 80%;
+        justify-self: center;
+        align-self: center;
+    } 
+    img {
+        max-width: 65%;
+    }
+    .buttons {
+        flex-grow: 1;
+        min-width: 45%;
+        margin:10px;
+    }
+}
+@media screen and (min-width: 1201px) and (max-width: 1600px) {
+    html {
+        font-size: 16px;
+    }
+    .quiz-container {
+        width: 55%;
+        height: 55%;
+        margin: 10px;
+    }
+    .button-container {
+        width: 80%;
+        justify-self: center;
+        align-self: center;
+    } 
+    img {
+        max-width: 70%;
+    }
+    .buttons {
+        flex-grow: 1;
+        min-width: 45%;
+        margin:10px;
+    }
+}
+
+
+/* 
+    min-width: 480px 
+    min-width: 768px
+    min-width: 1024px
+    min-width: 1200px
+*/

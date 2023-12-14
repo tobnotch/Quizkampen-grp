@@ -8,29 +8,39 @@
     <link rel="stylesheet" href="reset.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,600,700">
     <link href="https://fonts.googleapis.com/css2?family=Bungee+Spice&display=swap" rel="stylesheet">
-    <link rel="shortcut icon" href="Images/favicon.ico" type="image/x-icon">
     <link rel="stylesheet" href="style.css">
+    <link rel="shortcut icon" href="Images/favicon.ico" type="image/x-icon">
+    
 </head>
 <body>
     <header>
-        <h1>Quizkampen</h1>
+        <h1 class="logo">Quizkampen</h1>
     </header>
-    <!-- <h2 class="welcome">Välkommen!</h2> -->
     <main class="quiz-container start-screen" id="main-container">
 
-        <!-- <div class="category-container">
-            <h2>Välj kategori</h2>
+        <div class="category-container">
+            <h1 class="welcome">Välkommen!</h1>
+        </div>
+        <div class="difficulty-selection">
+            <p>Välj svårighetsgrad</p>
+            <input type="radio" name="difficulty" id="Easy">
+            <label for="Easy">Lätt</label>
+            <input type="radio" name="difficulty" id="Normal" checked>
+            <label for="Normal">Normal</label>
+            <input type="radio" name="difficulty" id="Hard">
+            <label for="Hard">Svår</label>
+        </div>
+        <h2>Välj kategori nedan för att spela</h2>
+        <div>
+            <button id="Historia" class="buttons">Historia</button>
+            <button id="Geografi" class="buttons">Geografi</button>
+            <button id="Vetenskap" class="buttons">Vetenskap</button>
+            <button id="Sport" class="buttons">Sport</button>
         </div>
 
-        <div class="button-container">
-            <button class="buttons">Historia</button>
-            <button class="buttons">Sport</button>
-            <button class="buttons">Vetenskap</button>
-            <button class="buttons">Geografi</button>
-        </div> -->
-
-        <div class="question-container">
+        <!-- <div class="question-container">
             <h2 class="question-counter">Fråga 1/5</h2>
+            <div id="progressbar"></div>
             <p class="question-text">Vilket land har flest invånare i världen?</p>
         </div>
 
@@ -39,7 +49,7 @@
             <button class="buttons">Ryssland</button>
             <button class="buttons">Australien</button>
             <button class="buttons">USA</button>
-        </div>
+        </div> -->
 
     </main>
     <footer>By Albin, Alice, Marcus, Tobias</footer>
