@@ -1,4 +1,5 @@
 import quizData from './questions.js';
+import RandomizeOrder from './RandomizeArray.js';
 
 const categories = ["Historia", "Sport", "Vetenskap", "Geografi"];
 
@@ -45,7 +46,7 @@ function showQuestion() {
     return;
   }
   
-  const selectedCategoryQuestions = quizData.filter(q => q.category === selectedCategory);
+  const selectedCategoryQuestions = RandomizeOrder(quizData.filter(q => q.category === selectedCategory));
 
   if (currentQuestionIndex < selectedCategoryQuestions.length) {
     const currentQuestion = selectedCategoryQuestions[currentQuestionIndex];
@@ -55,7 +56,7 @@ function showQuestion() {
     questionElement.innerHTML = currentQuestion.question;
 
     buttonContainer.innerHTML = '';
-    currentQuestion.options.forEach(option => {
+    RandomizeOrder(currentQuestion.options).forEach(option => {
       const button = document.createElement('button');
       button.classList.add('buttons');
       button.innerText = option;
