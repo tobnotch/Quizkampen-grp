@@ -17,6 +17,7 @@ let currentQuestionIndex = 0;
 let score = 0;
 let selectedCategory = null;
 let isAnswerSelected = false;
+let selectedCategoryQuestions = [];
 let timer;
 
 function showCategories() {
@@ -32,6 +33,8 @@ function showCategories() {
     button.innerText = category;
     button.addEventListener('click', () => {
       selectedCategory = category;
+      const retrievedQuestions = quizData.filter(q => q.category === selectedCategory);
+      selectedCategoryQuestions = RandomizeOrder(retrievedQuestions);    
       showQuestion();
     });
     buttonContainer.appendChild(button);
@@ -45,8 +48,6 @@ function showQuestion() {
     console.error('No category selected.');
     return;
   }
-  
-  const selectedCategoryQuestions = RandomizeOrder(quizData.filter(q => q.category === selectedCategory));
 
   if (currentQuestionIndex < selectedCategoryQuestions.length) {
     const currentQuestion = selectedCategoryQuestions[currentQuestionIndex];
@@ -176,6 +177,7 @@ function endQuiz() {
     currentQuestionIndex = 0;
     score = 0;
     selectedCategory = null;
+    selectedCategoryQuestions = [];
     clearTimeout(timer);
     document.querySelector('.timer').innerHTML = 'Tid: 5s'
     showCategories();
