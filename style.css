@@ -14,15 +14,6 @@ body {
     align-items: center;
 }
 
-footer {
-    text-align: center;
-    justify-self: flex-end;
-    margin: 10px;
-    padding-top: 5px;
-    width: 100%;
-    border-top: 2px solid black;
-}
-
 h1 {
     font-family: 'Bungee Spice', sans-serif;
     font-size: 2.5em;
@@ -97,6 +88,20 @@ h2 {
 
 .option:disabled {
     cursor: no-drop;
+}
+
+footer {
+    font-family: 'Shadows Into Light', sans-serif;
+    font-weight: 700;
+    font-size: 1.25em;
+    color: #348efe;
+    text-align: center;
+    justify-self: flex-end;
+    margin: 10px 0 0 0;
+    padding: 10px 0;
+    width: 100%;
+    border-top: 2px solid #50a2ff51;
+    background-color: white;
 }
 
 #next-btn {
