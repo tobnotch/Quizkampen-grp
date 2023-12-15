@@ -1,21 +1,39 @@
 const quizData = [
   {
-      category: 'Geografi',
-      question: 'Vad heter Tysklands huvudstad?',
-      options: ['Berlin', 'Madrid', 'Paris', 'Rom'],
-      correctAnswer: 'Berlin'
+    category: 'Geografi',
+    question: 'Vad heter Tysklands huvudstad?',
+    options: ['Berlin', 'Madrid', 'Paris', 'Rom'],
+    correctAnswer: 'Berlin'
   },
   {
-      category: 'Geografi',
-      question: 'Vilken är världens djupaste sjö?',
-      options: ['Tanganyikasjön', 'Titicacasjön', 'Bajkalsjön', 'Vättern'],
-      correctAnswer: 'Bajkalsjön'
+    category: 'Geografi',
+    question: 'Vilken är världens djupaste sjö?',
+    options: ['Tanganyikasjön', 'Titicacasjön', 'Bajkalsjön', 'Vättern'],
+    correctAnswer: 'Bajkalsjön'
   },
   {
-      category: 'Historia',
-      question: 'Vad hette Alexander den stores häst?',
-      options: ['Sagohästen ', 'Bukefalos', 'Lilla Gubben', 'Seabiscuit '],
-      correctAnswer: 'Bukefalos'
+    category: 'Geografi',
+    question: 'Vilket land har världens fjärde största befolkning?',
+    options: ['Indonesien', 'USA', 'Nigeria', 'Brasilien'],
+    correctAnswer: 'Indonesien'
+  },
+  {
+    category: 'Geografi',
+    question: 'Vilken är världen längsta flod?',
+    options: ['Amazonfloden', 'Mississippifloden', 'Yangtze', 'Nilen'],
+    correctAnswer: 'Nilen'
+  },
+  {
+    category: 'Geografi',
+    question: 'Vilken är världens största ö?',
+    options: ['Grönland', 'Madagaskar', 'Borneo', 'Kuba'],
+    correctAnswer: 'Grönland'
+  },
+  {
+    category: 'Geografi',
+    question: `Vilket land har denna flagga?<br><img src="cameroon.png" alt="Flagga" class="flag-image">`,
+    options: ['Kenya', 'Algeriet', 'Kamerun', 'Ghana'],
+    correctAnswer: 'Kamerun'
   },
   {
     category: 'Vetenskap',
@@ -48,16 +66,34 @@ const quizData = [
     correctAnswer: 'Apelsin'
   },
   {
-    category: 'Geografi',
-    question: 'Vilket land har världens fjärde största befolkning?',
-    options: ['Indonesien', 'USA', 'Nigeria', 'Brasilien'],
-    correctAnswer: 'Indonesien'
+    category: 'Historia',
+    question: 'Vilket år utspelade sig slaget vid Hastings?',
+    options: ['1066 ', '476', '1189', '1632 '],
+    correctAnswer: '1066'
   },
   {
     category: 'Historia',
-    question: 'Vilket år utspelade sig slage vid Hastings?',
-    options: ['1066 ', '476', '1189', '1632 '],
-    correctAnswer: '1066'
+    question: 'Vad hette Alexander den stores häst?',
+    options: ['Sagohästen ', 'Bukefalos', 'Lilla Gubben', 'Seabiscuit '],
+    correctAnswer: 'Bukefalos'
+  },
+  {
+    category: 'Historia',
+    question: 'Vilket år startade första världskriget?',
+    options: ['1905', '1914', '1920', '1939'],
+    correctAnswer: '1914'
+  },
+  {
+    category: 'Historia',
+    question: 'Vem var den första kvinnan som flög ensam över Atlanten?',
+    options: ['Amelia Earhart', 'Marie Curie', 'Rosa Parks', 'Margaret Thatcher'],
+    correctAnswer: 'Amelia Earhart'
+  },
+  {
+    category: 'Historia',
+    question: 'Vilken stad var huvudstaden i det antika Rom?',
+    options: ['Aten', 'Alexandria', 'Rom', 'Konstantinopel'],
+    correctAnswer: 'Bukefalos'
   },
   {
     category: 'Sport',
@@ -89,25 +125,6 @@ const quizData = [
     options: ['Roger Federer', 'Rafael Nadal', 'Novak Djokovic', 'Andy Murray'],
     correctAnswer: 'Rafael Nadal'
   },
-  {
-    category: 'Geografi',
-    question: 'Vilken är världen längsta flod?',
-    options: ['Amazonfloden', 'Mississippifloden', 'Yangtze', 'Nilen'],
-    correctAnswer: 'Nilen'
-  },
-  {
-    category: 'Geografi',
-    question: 'Vilken är världens största ö?',
-    options: ['Grönland', 'Madagaskar', 'Borneo', 'Kuba'],
-    correctAnswer: 'Grönland'
-  },
-  {
-    category: 'Geografi',
-    question: `Vilket land har denna flagga?<br><img src="cameroon.png" alt="Flagga" class="flag-image">`,
-    options: ['Kenya', 'Algeriet', 'Kamerun', 'Ghana'],
-    correctAnswer: 'Kamerun'
-  },
-  
 ];
 
 export default quizData;
