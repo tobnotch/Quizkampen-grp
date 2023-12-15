@@ -6,7 +6,7 @@ function CreateQuestionElements(questionDetails, currentQuestion, maxQuestions) 
 
     const questionCounter = document.createElement("h2");
     questionCounter.classList.add("question-counter");
-    questionCounter.innerHTML = `Fråga ${currentQuestion + 1}/${maxQuestions}`;
+    questionCounter.innerHTML = `Question ${currentQuestion + 1}/${maxQuestions}`;
     questionContainer.appendChild(questionCounter);
 
     const questionText = document.createElement("p");

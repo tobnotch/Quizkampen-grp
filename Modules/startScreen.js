@@ -1,11 +1,11 @@
 function GenerateStartScreen(categories) {
     const categoryContainer = document.createElement("div");
     const h1 = document.createElement("h1");
-    h1.innerHTML = "Välkommen!";
+    h1.innerHTML = "Welcome!";
     h1.classList.add("welcome");
     const h2 = document.createElement("h2");
     categoryContainer.classList.add("category-container");
-    h2.innerHTML = "Välj kategori nedan för att spela";
+    h2.innerHTML = "Pick a category below to start playing";
     categoryContainer.appendChild(h1);
     categoryContainer.appendChild(h2);
     
@@ -31,9 +31,9 @@ function GenerateDifficultySelection() {
     div.classList.add("difficulty-selection");
 
     const p = document.createElement("p");
-    p.innerHTML = "Välj svårighetsgrad";
+    p.innerHTML = "Choose difficulty";
     div.appendChild(p);
-    const radioDetails = [ {id: "Easy", text: "Lätt"},{id: "Normal", text: "Normal"}, {id: "Hard", text: "Svår"} ];
+    const radioDetails = [ {id: "Easy", text: "Easy"},{id: "Normal", text: "Normal"}, {id: "Hard", text: "Hard"} ];
     for (const details of radioDetails) {
         const radioInput = document.createElement("input");
         radioInput.type = "radio";

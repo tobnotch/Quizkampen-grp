@@ -252,14 +252,14 @@ img {
 }
 
 @keyframes progressbar-countdown {
-0% {
-    width: 100%;
-    background: #0F0;
-}
-100% {
-    width: 0%;
-    background: #F00;
-}
+    0% {
+        width: 100%;
+        background: #0F0;
+    }
+    100% {
+        width: 0%;
+        background: #F00;
+    }
 }
   
 
@@ -291,6 +291,9 @@ img {
         text-align: center;
         padding: 0;
         margin:5px;
+    }
+    .score-screen-button {
+        width: 80%;
     }
 
 }
@@ -324,6 +327,9 @@ img {
     img {
         width: 55%;
     }
+    .score-screen-button {
+        width: 70%;
+    }
 }
 @media screen and (min-width: 769px) and (max-width: 1024px) {
     html {
@@ -352,6 +358,9 @@ img {
         padding: 0;
         margin:5px;
     }
+    .score-screen-button {
+        width: 50%;
+    }
 }
 @media screen and (min-width: 1025px) and (max-width: 1200px) {
     html {
@@ -378,6 +387,9 @@ img {
         padding: 0;
         margin:5px;
     }
+    .score-screen-button {
+        width: 40%;
+    }
 }
 @media screen and (min-width: 1201px) and (max-width: 1600px) {
     html {
@@ -403,7 +415,11 @@ img {
         padding: 0;
         margin:5px;
     }
+    .score-screen-button {
+        width: 35%;
+    }
 }
+
 
 @media screen and (max-width: 500px) and (min-height:850px) {
     html {
@@ -520,10 +536,3 @@ img {
 }
 
 
-
-/* 
-    min-width: 480px 
-    min-width: 768px
-    min-width: 1024px
-    min-width: 1200px
-*/
