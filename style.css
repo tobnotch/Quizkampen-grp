@@ -6,13 +6,14 @@ html {
 body {
     margin: 0;
     background-color: #92c5ff;
-    min-height: 100vh;
+    height: 100vh;
 
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
 }
+
 footer {
     text-align: center;
     justify-self: flex-end;
@@ -21,13 +22,21 @@ footer {
     width: 100%;
     border-top: 2px solid black;
 }
+
 h1 {
     font-family: 'Bungee Spice', sans-serif;
     font-size: 2.5em;
+    margin: 10px;
+}
+
+a {
+    text-decoration: none;
 }
 
 h2 {
     margin: 15px 0;
+    font-weight: bold;
+    font-size: 1.5em;
 }
 
 .quiz-container {
@@ -39,6 +48,7 @@ h2 {
 
     display: flex;
     flex-direction: column;
+    align-items: center;
 }
 
 .question-container {
@@ -47,20 +57,21 @@ h2 {
     align-items: center;
 }
 
-.question-container p {
+.question {
     border-top: 1px solid #c8e5ff;
     border-bottom: 1px solid #c8e5ff;
     padding: 10px 0;
     margin: 10px 0 16px 0;
+    text-align: center;
 }
 
 .button-container {
     display: flex;
-    flex-wrap: wrap;
+    flex-direction: column;
     justify-content: space-evenly;
 }
 
-.buttons {
+.option {
     font-family: 'Open Sans', sans-serif;
     border: 2px solid #48aaff;
     border-radius: 10px;
@@ -69,24 +80,48 @@ h2 {
     font-weight: 600;
     padding: 20px 50px;
     margin: 10px 0;
-
     width: 200px;
     height: 75px;
-    
-    /* overflow: hidden;
-    text-overflow: ellipsis; */
 
+    overflow: hidden;
+        
     transition: 200ms;
 }
 
-.buttons:hover, .buttons:focus {
+.option:hover:not([disabled]) {
     background-color: #48aaff;
     color: white;
     transform: scale(1.05);
     box-shadow: 0 0.5em 0.7em -0.4em #48aaff;
 }
 
-/* styles för start sidan */
+.option:disabled {
+    cursor: no-drop;
+}
+
+#next-btn {
+    width: 200px;
+    height: 35px;
+    margin: 15px;
+
+    justify-content: center;
+    align-items: center;
+}
+
+#next-btn:hover {
+    background-color: white;
+    color: #348efe;
+}
+
+.correct {
+    background-color: #9aeabc;;
+}
+
+.incorrect {
+    background-color: #ff9393;
+}
+
+/* styles för start sidan
 .start-screen {
     background-color: white;
     border: 3px solid #50a2ff51;
@@ -98,20 +133,30 @@ h2 {
     flex-direction: column;
 }
 
-/* styles för start sidan */
+styles för start sidan
 .category-container {
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
-/* styles för start sidan */
+styles för start sidan
 .welcome {
     font-size: 2em;
-}
+} */
 
 @media (min-width: 768px) {
     h1 {
         font-size: 3.5em;
+        margin-top: 30px;
+    }
+
+    .button-container {
+        flex-direction: row;
+        flex-wrap: wrap;
+    }
+
+    #next-btn {
+        width: 420px;
     }
 }

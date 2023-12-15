@@ -11,13 +11,18 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    
     <header>
-        <h1>Quizkampen</h1>
+        <a href="http://127.0.0.1:5500/Quizkampen-grp/index.html">
+            <h1>Quizkampen</h1>
+        </a>
     </header>
+
     <!-- <h2 class="welcome">Välkommen!</h2> -->
     <div class="quiz-container start-screen">
 
-        <!-- <div class="category-container">
+        <!-- 
+        <div class="category-container">
             <h2>Välj kategori</h2>
         </div>
 
@@ -26,21 +31,25 @@
             <button class="buttons">Sport</button>
             <button class="buttons">Vetenskap</button>
             <button class="buttons">Geografi</button>
-        </div> -->
+        </div>
+        -->
 
         <div class="question-container">
-            <h2>Fråga 1/5</h2>
-            <p>Vilket land har flest invånare i världen?</p>
+            <h2>Fråga-nummer</h2>
+            <p class="question">Fråga-text</p>
         </div>
 
         <div class="button-container">
-            <button class="buttons">Kina</button>
-            <button class="buttons">Ryssland</button>
-            <button class="buttons">Australien</button>
-            <button class="buttons">USA</button>
+            <button class="option">Svar 1</button>
+            <button class="option">Svar 2</button>
+            <button class="option">Svar 3</button>
+            <button class="option">Svar 4</button>
         </div>
+        <button class="option" id="next-btn">Nästa</button>
 
     </div>
+    
     <footer>By Albin, Alice, Marcus, Tobias</footer>
+    
 </body>
 </html>
