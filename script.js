@@ -46,10 +46,23 @@ const questions = [
     }
 ];
 
+const backgroundsArray = [
+    {
+        backgrounds: [
+            {text: "#92c5ff"},
+            {text: "#219ebc"},
+            {text: "#023047"},
+            {text: "#fb8500"},
+            {text: "#ffb703"},
+        ]
+    }
+];
+
 const questionHeader = document.querySelector('h2');
 const questionElement = document.querySelector('.question');
 const answerButtons = document.querySelector('.button-container');
 const nextButton = document.querySelector('#next-btn');
+const bodyElement = document.querySelector('body');
 
 let currentQuestionIndex = 0;
 let score = 0;
@@ -67,9 +80,11 @@ function startGame() {
 function showQuestion() {
     resetState();
     let currentQuestion = questions[currentQuestionIndex];
+    let currentBackground = backgroundsArray[0].backgrounds[currentQuestionIndex];
     let questionNo = currentQuestionIndex + 1;
     questionHeader.innerHTML = "Fråga " + questionNo + "/" + "5";
     questionElement.innerHTML = currentQuestion.question;
+    bodyElement.style.backgroundColor = currentBackground.text;
 
     currentQuestion.answers.forEach(answer => {
         const button = document.createElement("button");
@@ -154,6 +169,7 @@ function showScore() {
 
     questionElement.innerHTML = `Du fick ${score} av ${questions.length} poäng!`;
     questionElement.style = "font-size: 1.75em; margin-bottom: 30px";
+    bodyElement.style = "background-color: #ffef9f";
 
     nextButton.innerHTML = "Spela igen";
     nextButton.style.display = "flex";
