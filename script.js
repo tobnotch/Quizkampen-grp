@@ -83,16 +83,19 @@ function AddButtonEvents() {
     buttons.forEach(button => {
         button.addEventListener('click', () => {
             if (button.disabled === true) return;
+            const countdownInner = document.querySelector(".inner");
+            countdownInner.style.animationPlayState = "paused";
+
             if (button.dataset.correct != null) {
                 button.classList.add("correct");
                 state.correctAnswers++;
-                state.answers.push("Rätt");
+                state.answers.push("Correct");
                 AddResponseMessage("Korrekt!", true);
             }
             else {
                 button.classList.add("wrong");
                 document.querySelector("[data-correct]").classList.add("correct");
-                state.answers.push("Fel");
+                state.answers.push("Wrong");
                 AddResponseMessage("Fel svar", false);
             }
             buttons.forEach(btn => {
@@ -161,7 +164,7 @@ function SetDifficulty(inputDifficulty){
         apiDifficulty = "medium";
     }
     if (inputDifficulty === "Hard") {
-        state.duration = "5s";
+        state.duration = "10s";
         apiDifficulty = "hard";
     }
 }
@@ -217,7 +220,7 @@ function EndCategory() {
 
     state.answers.forEach((answer, idx) => {
         const p = document.createElement("p");
-        const correctClass = answer === "Rätt" ? "summary-correct" : "summary-wrong";
+        const correctClass = answer === "Correct" ? "summary-correct" : "summary-wrong";
         p.innerHTML = `Question ${idx+1}: <span class=${correctClass}>${answer}</span>`;
         scoreScreen.appendChild(p);
     })
@@ -263,7 +266,7 @@ function HandleTimeRanOut() {
         }
         button.disabled = true;
     });
-    state.answers.push("Fel");
+    state.answers.push("Wrong");
     AddResponseMessage("Tyvärr rann tiden ut", false);
     setTimeout(ChangeQuestion, 1000);
 }
