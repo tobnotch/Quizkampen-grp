@@ -66,10 +66,8 @@ const bodyElement = document.querySelector('body');
 
 let currentQuestionIndex = 0;
 let score = 0;
-let blinkingInterval;
 
 function startGame() {
-    clearInterval(blinkingInterval);
     currentQuestionIndex = 0;
     score = 0;
     questionElement.style = "font-size: 1em";
