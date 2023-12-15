@@ -93,7 +93,7 @@ const quizData = [
     category: 'Historia',
     question: 'Vilken stad var huvudstaden i det antika Rom?',
     options: ['Aten', 'Alexandria', 'Rom', 'Konstantinopel'],
-    correctAnswer: 'Bukefalos'
+    correctAnswer: 'Rom'
   },
   {
     category: 'Sport',
