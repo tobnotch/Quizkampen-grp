@@ -147,7 +147,7 @@ function StartCategory(categoryName, difficulty) {
         InitializeChallenge();
     }
     else {
-        state.currentCategory = categoryMap.get(categoryName);
+        state.currentCategory = RandomizeOrder(categoryMap.get(categoryName));
     }
     state.categoryName = categoryName;
     state.currentQuestion = 0;
