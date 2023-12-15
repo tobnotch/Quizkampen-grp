@@ -37,15 +37,33 @@ const quizData = [
   },
   {
     category: 'Sport',
-    question: 'Vem vann fotbolls VM 1976?',
-    options: ['Italien ', 'Argentina', 'Brasilien', 'Tyskland '],
-    correctAnswer: 'Argentina'
+    question: 'Vilket land är känt för att ha uppfunnit sporten fotboll?',
+    options: ['Brasilien', 'England', 'Italien', 'Spanien'],
+    correctAnswer: 'England'
   },
   {
     category: 'Sport',
-    question: 'Hur många guldmedaljer tog Michael Phelps i OS 2008?',
-    options: ['0 ', '6', '2', '8'],
-    correctAnswer: '8'
+    question: 'Vad är den högsta poängen en enskild spelare kan uppnå i en omgång av bowling?',
+    options: ['100', '200', '300', '400'],
+    correctAnswer: '300'
+  },
+  {
+    category: 'Sport',
+    question: 'Vilket av följande djur är inte en symbol för de olympiska spelen?',
+    options: ['Lejon', 'Tiger', 'Örn', 'Björn'],
+    correctAnswer: 'Örn'
+  },
+  {
+    category: 'Sport',
+    question: 'Vem betraktas som "The Greatest" inom boxning och har vunnit världsmästartitlar i flera viktklasser?',
+    options: ['Muhammad Ali', 'Mike Tyson', 'George Foreman', 'Manny Pacquiao'],
+    correctAnswer: 'Muhammad Ali'
+  },
+  {
+    category: 'Sport',
+    question: 'Vilken tennisspelare kallas också "King of Clay" och är mest framstående på grusunderlag?',
+    options: ['Roger Federer', 'Rafael Nadal', 'Novak Djokovic', 'Andy Murray'],
+    correctAnswer: 'Rafael Nadal'
   },
   {
     category: 'Geografi',
