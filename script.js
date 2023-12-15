@@ -1,14 +1,26 @@
 import Question from "./Modules/question.js";
 import GenerateStartScreen from "./Modules/startScreen.js";
 import CreateQuestionElements from "./Modules/questionScreen.js";
+import RandomizeOrder from "./Modules/randomizeArray.js";
 
 const state = {
     currentQuestion: 0,
     maxQuestions: 0,
     currentCategory: [],
+    categoryName: "",
     correctAnswers: 0,
-    duration: "5s"
-
+    duration: "5s",
+    answers: [],
+    Reset() {
+        this.currentQuestion = 0;
+        this.maxQuestions = 0;
+        this.currentCategory = [];
+        this.categoryName = "";
+        this.correctAnswers = 0;
+        this.duration = "5s";
+        this.answers = [];
+        
+    }
 }
 
 const history = [];
@@ -28,8 +40,8 @@ science.push(new Question("Fråga om vetenskap. Vad är en bäver?", "Bäver", [
 
 
 const sports = [];
-sports.push(new Question("Vem vann?", "Jag", "Arsenal", "Madrid", "Jag", "Du"));
-sports.push(new Question("Vem vann?", "Jag", "Arsenal", "Madrid", "Jag", "Du"));
+sports.push(new Question("Vem vann?", "Jag", ["Arsenal", "Madrid", "Jag", "Du"]));
+sports.push(new Question("Vem vann?", "Jag", ["Arsenal", "Madrid", "Jag", "Du"]));
 
 const categoryMap = new Map();
 categoryMap.set("Historia", history);
@@ -46,9 +58,6 @@ ShowStartScreen();
 function ClearMainContainer() {
     const mainContainer = document.querySelector("#main-container");
     mainContainer.innerHTML = "";
-    // while(mainContainer.firstChild) {
-    //     mainContainer.remove(mainContainer.lastChild);
-    // }
 }
 
 function AddQuestion(questionDetails){
@@ -67,10 +76,12 @@ function AddButtonEvents() {
             if (button.dataset.correct != null) {
                 button.classList.add("correct");
                 state.correctAnswers++;
+                state.answers.push("Rätt");
                 AddResponseMessage("Korrekt!", true);
             }
             else {
                 button.classList.add("wrong");
+                state.answers.push("Fel");
                 AddResponseMessage("Fel svar", false);
             }
             buttons.forEach(btn => {
@@ -85,20 +96,27 @@ function AddButtonEvents() {
 function ShowStartScreen() {
     ClearMainContainer();
     const mainContainer = document.querySelector("#main-container");
-    mainContainer.classList.add("start-screen")
-    const categories = []
-    categoryMap.forEach((key,value) => categories.push(value))
+    if (mainContainer.classList.contains("score-screen")) {
+        mainContainer.classList.remove("score-screen");
+    }
+    mainContainer.classList.add("start-screen");
+    const categories = [];
+    categoryMap.forEach((key,value) => categories.push(value));
     
     const startScreenItems = GenerateStartScreen(categories);
     startScreenItems.forEach(item => mainContainer.appendChild(item));
     AddCategoryButtonEvents();
+    const challengeButton = document.querySelector(".challenge-mode-button")
+    challengeButton.addEventListener('click', () => {
+        const difficulty = document.querySelector("input[name='difficulty']:checked").id;
+        StartCategory(challengeButton.id, difficulty);
+    })
 }
 function AddCategoryButtonEvents() {
     const buttons = document.querySelectorAll(".buttons");
     buttons.forEach(button => {
         button.addEventListener('click', () => {
             const difficulty = document.querySelector("input[name='difficulty']:checked").id;
-            console.log(difficulty);
             StartCategory(button.id, difficulty);
         })
     })
@@ -114,15 +132,28 @@ function SetDifficulty(difficulty){
         state.duration = "3s";
     }
 }
-
+function InitializeChallenge() {
+    const challengeArray = [];
+    categoryMap.forEach(category => {
+        category.forEach(question => {
+            challengeArray.push(question);
+        })
+    })
+    state.currentCategory = RandomizeOrder(challengeArray);
+}
 function StartCategory(categoryName, difficulty) {
     SetDifficulty(difficulty);
-    state.currentCategory = categoryMap.get(categoryName);
-    console.log(state.currentCategory);
+    if (categoryName === "Secret Challenge") {
+        InitializeChallenge();
+    }
+    else {
+        state.currentCategory = categoryMap.get(categoryName);
+    }
+    state.categoryName = categoryName;
     state.currentQuestion = 0;
     state.correctAnswers = 0;
+    state.answers = [];
     state.maxQuestions = state.currentCategory.length;
-    console.log(state.maxQuestions);
     document.querySelector("#main-container").classList.remove("start-screen");
     ChangeQuestion(true);
 }
@@ -132,13 +163,45 @@ function ChangeQuestion(start = false) {
         state.currentQuestion++;
     }
     if (state.currentQuestion === state.maxQuestions) {
-        console.log("Du fick " + state.correctAnswers + " korrekta svar. Grattis");
-        ShowStartScreen();
+        EndCategory();
         return;
     }
     const question = state.currentCategory[state.currentQuestion];
     AddQuestion(question);
 
+}
+function EndCategory() {
+    ClearMainContainer();
+    const scoreScreen = document.createElement("div");
+    scoreScreen.classList.add("score-summary");
+    const categoryText = document.createElement("h4");
+    categoryText.textContent = "Kategori: " + state.categoryName;
+    scoreScreen.appendChild(categoryText);
+
+    const summary = document.createElement("h2");
+    summary.textContent = `Du fick totalt ${state.correctAnswers} rätt på ${state.maxQuestions} frågor!`;
+    scoreScreen.appendChild(summary);
+
+    state.answers.forEach((answer, idx) => {
+        const p = document.createElement("p");
+        const correctClass = answer === "Rätt" ? "summary-correct" : "summary-wrong";
+        p.innerHTML = `Fråga ${idx+1}: <span class=${correctClass}>${answer}</span>`;
+        scoreScreen.appendChild(p);
+    })
+    const button = document.createElement("button");
+    button.textContent = "Spela igen";
+    button.classList.add("score-screen-button");
+    
+    button.addEventListener('click', ResetToStart);
+
+    const quizContainer = document.querySelector("#main-container");
+    quizContainer.classList.add("score-screen");
+    quizContainer.appendChild(scoreScreen);
+    quizContainer.appendChild(button);
+}
+function ResetToStart() {
+    state.Reset();
+    ShowStartScreen();
 }
 function CreateCountdown() {
     const questionCounter = document.querySelector(".question-counter");
@@ -162,6 +225,7 @@ function HandleTimeRanOut() {
         button.classList.add("wrong")
         button.disabled = true;
     });
+    state.answers.push("Fel");
     AddResponseMessage("Tyvärr rann tiden ut", false);
     setTimeout(ChangeQuestion, 1000);
 }
@@ -175,5 +239,6 @@ function AddResponseMessage(message, correct) {
     else {
         p.style.color = "red";
     }
-    document.querySelector("#main-container").appendChild(p);
+    const buttonCounter = document.querySelector(".button-container");
+    buttonCounter.insertAdjacentElement("beforebegin", p);
 }

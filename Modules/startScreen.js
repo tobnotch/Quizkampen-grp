@@ -19,7 +19,11 @@ function GenerateStartScreen(categories) {
         button.classList.add("buttons");
         buttonContainer.appendChild(button);
     })
-    return [categoryContainer, difficultySelection, buttonContainer]
+    const challengeButton = document.createElement("button");
+    challengeButton.textContent = "Ultra secret challenge mode";
+    challengeButton.classList.add("challenge-mode-button")
+    challengeButton.id = "Secret Challenge";
+    return [categoryContainer, difficultySelection, buttonContainer, challengeButton]
 }
 
 function GenerateDifficultySelection() {

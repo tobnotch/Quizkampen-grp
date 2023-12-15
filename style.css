@@ -34,6 +34,7 @@ img {
     width: 50%;
     height: 45%;
     border: 1px solid black;
+    margin-bottom: 10px;
 }
 .logo {
     padding-top: 10px;
@@ -63,22 +64,21 @@ img {
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-bottom: 1rem;
+    margin-bottom: 5px;
+    border-bottom: 1px solid #c8e5ff;
 }
 
 .question-container p {
     border-top: 1px solid #c8e5ff;
-    border-bottom: 1px solid #c8e5ff;
     padding: 10px 0;
-    margin: 10px 0 16px 0;
+    margin: 10px 0 5px 0;
 }
 
 .button-container {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-evenly;
-    padding-top: 8px;
-    border-top: 1px solid #c8e5ff;
+    /* border-top: 1px solid #c8e5ff; */
 }
 
 .buttons {
@@ -114,6 +114,7 @@ img {
     text-align: center;
     font-size: 2rem;
     font-weight: bold;
+    padding: 5px;
 }
 .buttons:hover{
     opacity: 90%;
@@ -143,10 +144,13 @@ img {
     justify-content: center;
     text-align: center;
 }
+.category-container h2 {
+    font-size: 1.5rem;
+}
 
 /* styles för start sidan */
 .welcome {
-    font-size: 2em;
+    font-size: 3rem;
 }
 .difficulty-selection {
     justify-self: center;
@@ -157,13 +161,67 @@ img {
 .difficulty-selection p {
     font-weight: bold;
     margin-bottom: 5px;
+    font-size: 1.5rem;
+    padding-bottom: 5px;
+}
+.difficulty-selection label {
+    font-size: 1.3rem;
+}
+
+.quiz-container .score-screen {
+    width: 60%;
+    height: 800px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.score-screen-button {
+    width: 30%;
+    align-self: center;
+    font-size: 3rem;
+    font-family: 'Bungee Spice', sans-serif;
+    background-color:  #48aaff;
+    border-radius: 10px;
+    border: 2px solid #48aaff;
+    margin: 10px 10px 5px 10px;
+}
+.score-screen button:hover {
+    transform: scale(1.05);
+}
+.score-summary {
+    height: 100%;
+    font-size: 3rem;
+    
+}
+.score-summary h2 {
+    font-weight: bolder;
+    text-align: center;
+    border-bottom: 2px solid #c8e5ff;
+    padding-bottom: 10px;
+}
+.score-summary h4 {
+    font-size: 2rem;
+    text-align: center;
+    font-style: italic;
+    font-weight: bold;
+}
+.score-summary p {
+    margin: 5px;
+}
+.summary-correct {
+    color: green;
+    font-weight: 500;
+}
+.summary-wrong {
+    color: red;
+    font-style: italic;
 }
 .progressbar {
     width: 90%;
     margin: 5px auto;
     border: solid 1px #000;
-  }
-  .progressbar .inner {
+}
+.progressbar .inner {
     height: 15px;
     animation: progressbar-countdown;
     /* Placeholder, this will be updated using javascript */
@@ -176,17 +234,33 @@ img {
     animation-play-state: paused;
     /* We want a linear animation, ease-out is standard */
     animation-timing-function: linear;
-  }
-  @keyframes progressbar-countdown {
-    0% {
-      width: 100%;
-      background: #0F0;
-    }
-    100% {
-      width: 0%;
-      background: #F00;
-    }
-  }
+}
+
+.challenge-mode-button {
+    position: absolute;
+    bottom: 10px;
+    left: 5px;
+    height: 10px;
+    width: 80px;
+    font-size: 5px;
+    color: white;
+    background-color:  #48aaff;
+    border-radius: 10px;
+}
+.challenge-mode-button:hover {
+    transform: scale(1.05);
+}
+
+@keyframes progressbar-countdown {
+0% {
+    width: 100%;
+    background: #0F0;
+}
+100% {
+    width: 0%;
+    background: #F00;
+}
+}
   
 
 @media (min-width: 768px) {
@@ -196,6 +270,142 @@ img {
 }
 
 @media screen and (max-width: 500px) {
+    html {
+        font-size: 12px;
+    }
+    .quiz-container {
+        width: 90%;
+        height: 90%;
+        margin: 10px;
+    }
+    img {
+        width: 100%;
+    }
+    #main-container > div button {
+        width: 90%;
+    }
+    .buttons {
+        flex-grow: 1;
+        min-width: 45%;
+        max-height: 50px;
+        text-align: center;
+        padding: 0;
+        margin:5px;
+    }
+
+}
+
+
+@media screen and (min-width: 501px) and (max-width: 768px) {
+    html {
+        font-size: 12px;
+    }
+    .quiz-container {
+        width: 90%;
+        height: 90%;
+        margin: 10px;
+    }
+    /* .button-container {
+        display: grid;
+        justify-items: center;
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: 1fr 1fr;
+        gap: 5px;
+    } */
+    .buttons {
+        flex-grow: 1;
+        min-width: 45%;
+        max-height: 50px;
+        text-align: center;
+        padding: 0;
+        margin:5px;
+    }
+
+    img {
+        width: 55%;
+    }
+}
+@media screen and (min-width: 769px) and (max-width: 1024px) {
+    html {
+        font-size: 12px;
+    }
+    .quiz-container {
+        width: 75%;
+        height: 75%;
+        margin: 10px;
+    }
+    /* .button-container {
+        display: grid;
+        justify-items: center;
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: 1fr 1fr;
+        gap: 5px;
+    } */
+    img {
+        width: 55%;
+    }
+    .buttons {
+        flex-grow: 1;
+        min-width: 45%;
+        max-height: 50px;
+        text-align: center;
+        padding: 0;
+        margin:5px;
+    }
+}
+@media screen and (min-width: 1025px) and (max-width: 1200px) {
+    html {
+        font-size: 12px;
+    }
+    .quiz-container {
+        width: 75%;
+        height: 75%;
+        margin: 10px;
+    }
+    .button-container {
+        width: 80%;
+        justify-self: center;
+        align-self: center;
+    } 
+    img {
+        max-width: 65%;
+    }
+    .buttons {
+        flex-grow: 1;
+        min-width: 45%;
+        max-height: 50px;
+        text-align: center;
+        padding: 0;
+        margin:5px;
+    }
+}
+@media screen and (min-width: 1201px) and (max-width: 1600px) {
+    html {
+        font-size: 12px;
+    }
+    .quiz-container {
+        height: 55%;
+        margin: 10px;
+    }
+    .button-container {
+        width: 80%;
+        justify-self: center;
+        align-self: center;
+    } 
+    img {
+        max-width: 70%;
+    }
+    .buttons {
+        flex-grow: 1;
+        min-width: 45%;
+        max-height: 50px;
+        text-align: center;
+        padding: 0;
+        margin:5px;
+    }
+}
+
+@media screen and (max-width: 500px) and (min-height:850px) {
     html {
         font-size: 15px;
     }
@@ -211,7 +421,7 @@ img {
         width: 90%;
     }
 }
-@media screen and (min-width: 501px) and (max-width: 768px) {
+@media screen and (min-width: 501px) and (max-width: 768px) and (min-height:850px) {
     html {
         font-size: 13px;
     }
@@ -237,7 +447,7 @@ img {
         width: 90%;
     }
 }
-@media screen and (min-width: 769px) and (max-width: 1024px) {
+@media screen and (min-width: 769px) and (max-width: 1024px)  and (min-height:850px) {
     html {
         font-size: 14px;
     }
@@ -262,7 +472,7 @@ img {
         margin:10px;
     }
 }
-@media screen and (min-width: 1025px) and (max-width: 1200px) {
+@media screen and (min-width: 1025px) and (max-width: 1200px)  and (min-height:850px) {
     html {
         font-size: 16px;
     }
@@ -285,7 +495,7 @@ img {
         margin:10px;
     }
 }
-@media screen and (min-width: 1201px) and (max-width: 1600px) {
+@media screen and (min-width: 1201px) and (max-width: 1600px)  and (min-height:850px) {
     html {
         font-size: 16px;
     }
@@ -308,6 +518,7 @@ img {
         margin:10px;
     }
 }
+
 
 
 /* 

@@ -1,3 +1,5 @@
+import RandomizeOrder from "./randomizeArray.js";
+
 function CreateQuestionElements(questionDetails, currentQuestion, maxQuestions) {
     const questionContainer = document.createElement("div");
     questionContainer.classList.add("question-container");
@@ -18,9 +20,10 @@ function CreateQuestionElements(questionDetails, currentQuestion, maxQuestions) 
         img.alt = questionDetails.imgDescription;
         questionContainer.appendChild(img);
     }
+    const answersRandomOrder = RandomizeOrder(questionDetails.answers)
     const buttonContainer = document.createElement("div");
     buttonContainer.classList.add("button-container");
-    questionDetails.answers.forEach(answer => {
+    answersRandomOrder.forEach(answer => {
         const btn = document.createElement("button");
         btn.classList.add("buttons");
         btn.innerHTML = answer;
@@ -31,4 +34,5 @@ function CreateQuestionElements(questionDetails, currentQuestion, maxQuestions) 
     })
     return [questionContainer, buttonContainer];
 }
+
 export default CreateQuestionElements;
