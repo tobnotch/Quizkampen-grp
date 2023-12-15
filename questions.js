@@ -24,6 +24,30 @@ const quizData = [
     correctAnswer: 'Au'
   },
   {
+    category: 'Vetenskap',
+    question: 'Vilket djur kan regenerera sina lemmer om de skadas eller amputeras?',
+    options: ['Sjöstjärna', 'Bläckfisk', 'Salamander', 'Gürteldjur'],
+    correctAnswer: 'Salamander'
+  },
+  {
+    category: 'Vetenskap',
+    question: 'Vilken planet har en dag som är längre än dess år?',
+    options: ['Mars', 'Venus', 'Jupiter', 'Saturnus'],
+    correctAnswer: 'Venus'
+  },
+  {
+    category: 'Vetenskap',
+    question: 'Vilken fågel är känd för att härma ljudet av andra fåglar och till och med maskiner?',
+    options: ['Näktergal', 'Härmfågel', 'Papegoja', 'Uggla'],
+    correctAnswer: 'Härmfågel'
+  },
+  {
+    category: 'Vetenskap',
+    question: 'Vilken frukts surhet liknar den hos en citron och kan användas för att leda elektricitet?',
+    options: ['Banan', 'Jordgubbe', 'Apelsin', 'Kiwi'],
+    correctAnswer: 'Apelsin'
+  },
+  {
     category: 'Geografi',
     question: 'Vilket land har världens fjärde största befolkning?',
     options: ['Indonesien', 'USA', 'Nigeria', 'Brasilien'],
