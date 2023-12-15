@@ -59,6 +59,12 @@ const quizData = [
     options: ['Grönland', 'Madagaskar', 'Borneo', 'Kuba'],
     correctAnswer: 'Grönland'
   },
+  {
+    category: 'Geografi',
+    question: `Vilket land har denna flagga?<br><img src="cameroon.png" alt="Flagga" class="flag-image">`,
+    options: ['Kenya', 'Algeriet', 'Kamerun', 'Ghana'],
+    correctAnswer: 'Kamerun'
+  },
   
 ];
 

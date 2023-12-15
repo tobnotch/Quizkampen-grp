@@ -44,6 +44,14 @@ h2 {
     display: flex;
     flex-direction: column;
     align-items: center;
+    position: relative;
+}
+
+.category-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  
 }
 
 .question {
@@ -54,6 +62,15 @@ h2 {
   font-weight: bold;
   font-size: 18px;
   line-height: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.flag-image {
+  margin-left: 10px;
+  width: 80px;
+  object-fit: cover;
 }
 
 .button-container {
@@ -63,8 +80,10 @@ h2 {
 }
 
 .buttons,
-.play-again-button {
+.play-again-button,
+.disabled {
     font-family: 'Open Sans', sans-serif;
+    background-color: rgb(240, 240, 240);
     border: 2px solid #48aaff;
     border-radius: 10px;
     color: #348efe;
@@ -96,14 +115,14 @@ h2 {
     box-shadow: 0 0.5em 0.7em -0.4em #48aaff;
 }
 
-/* styles för start sidan */
-.category-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+.disabled:hover,
+.disabled:focus {
+  background-color: rgb(240, 240, 240);
+  color: #348efe;
+  box-shadow: none;
+  transform: none;
 }
 
-/* styles för start sidan */
 .welcome {
     font-size: 2em;
     font-weight: bold;
@@ -113,6 +132,43 @@ h2 {
     h1 {
         font-size: 3.5em;
     }
+}
+
+@media (max-width: 350px) {
+  body {
+    width: 320px;
+  }
+
+  .quiz-container {
+    width: 280px;
+    height: 400px;
+    position: relative;
+  }
+
+  .button-container {
+    display: flex;
+    position: absolute;
+    top: 100px;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+  }
+
+  .buttons {
+    font-family: 'Open Sans', sans-serif;
+    background-color: rgb(240, 240, 240);
+    border: 2px solid #48aaff;
+    border-radius: 10px;
+    color: #348efe;
+    font-size: 1em;
+    font-weight: 600;
+    padding: 20px 50px;
+    margin: 10px 0;
+
+    width: 200px;
+    height: 75px;
+    
+    transition: 200ms;
+  }
 }
 
 .buttons.correct {
@@ -135,4 +191,25 @@ h2 {
   25%, 75% {
     opacity: 0;
   }
+}
+
+.timer-container {
+  background-color: aquamarine;
+  border: none;
+  height: 70px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  position: absolute;
+  top: -35px;
+  left: -35px; 
+}
+
+.timer {
+  padding: 10px;
+  font-weight: bold;
+}
+
+.hidden {
+  display: none;
 }
