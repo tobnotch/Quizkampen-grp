@@ -8,8 +8,8 @@ const buttonContainer = document.querySelector('.button-container');
 const questionElement = document.querySelector('.question');
 const welcomeElement = document.querySelector('.welcome');
 const quizContainer = document.querySelector('.quiz-container');
-const timerContainer = document.querySelector('.timer-container');
-const timerElement = document.querySelector('.timer');
+//const timerContainer = document.querySelector('.timer-container');
+//const timerElement = document.querySelector('.timer');
 const progressContainer = document.querySelector('.progress-container');
 const progressBar = document.querySelector('.progress-bar');
 
@@ -71,7 +71,7 @@ function showQuestion() {
     });
 
     progressContainer.classList.remove('hidden');
-    timerContainer.classList.remove('hidden');
+    //timerContainer.classList.remove('hidden');
     startTimer(5, () => handleTimeout(currentQuestion.correctAnswer));
 
   } else {
@@ -202,7 +202,7 @@ function resetGame() {
   selectedCategory = null;
   selectedCategoryQuestions = [];
   clearTimeout(timer);
-  timerElement.innerHTML = 'Tid: 5s';
+  //timerElement.innerHTML = 'Tid: 5s';
   document.querySelector('.timer-container').classList.add('hidden');
 }
 
@@ -213,7 +213,7 @@ function endQuiz() {
   progressBar.style.animation = '';
   progressContainer.classList.add('hidden');
 
-  timerContainer.classList.add('hidden');
+  //timerContainer.classList.add('hidden');
   buttonContainer.innerHTML = '';
   questionElement.innerHTML = `Du fick: ${score} poäng. <br> Highscore för ${selectedCategory}: ${highscore} poäng.`;
 
