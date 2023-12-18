@@ -1,5 +1,5 @@
 function RandomizeOrder(array) {
-    let inputArray = array.slice();
+    let inputArray = [...array];
     const outputArray = [];
     while (inputArray.length > 0) {
         const randomIdx = Math.floor(Math.random() * inputArray.length)
