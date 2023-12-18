@@ -19,6 +19,7 @@ const state = {
   selectedCategoryQuestions: [],
   timer: undefined,
   highscore: 0,
+  lives: 5,
 }
 
 
