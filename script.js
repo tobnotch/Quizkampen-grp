@@ -176,7 +176,7 @@ function updateHighscore(reset = false) {
     state.highscore = 0;
     localStorage.setItem(`${state.selectedCategory}-highscore`, state.highscore);
   }
-  questionElement.innerHTML = `Du fick: ${state.score} poäng. <br> Highscore för ${state.selectedCategory}: ${state.highscore} poäng.`;
+  questionElement.innerHTML = `<p>Du fick: ${state.score} poäng.</p> <p>Highscore för ${state.selectedCategory}: ${state.highscore} poäng.</p>`;
 }
 
 function updateQuestionNumber(totalQuestions) {
