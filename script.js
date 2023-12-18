@@ -29,7 +29,18 @@ const state = {
         
     }
 }
-
+const boss = {
+  historyHenchman: "https://opentdb.com/api.php?amount=10&category=23&difficulty=medium&type=multiple",
+  mythologyMinotaur: "https://opentdb.com/api.php?amount=10&category=20&difficulty=medium&type=multiple",
+  televisionTerror: "https://opentdb.com/api.php?amount=10&category=14&difficulty=medium&type=multiple",
+  videogamesVampire: "https://opentdb.com/api.php?amount=10&category=15&difficulty=medium&type=multiple",
+  geographyGolem: "https://opentdb.com/api.php?amount=10&category=22&difficulty=medium&type=multiple",
+}
+const player = {
+  hp: 20,
+  damage: 5,
+  
+}
 const categories = ["History", "Geography", "Science", "Sports"];
 
 const urlMap = new Map();
