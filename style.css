@@ -149,56 +149,6 @@ h2 {
   }
 }
 
-@media only screen and (max-width: 500px) {
-  .quiz-container {
-    justify-content: center;
-    height: min-content;
-    width: 300px;
-  }
-  
-  .button-container {
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    width: 300px;
-  }
-}
-
-@media only screen and (max-height: 670px) and (max-width: 500px) {
-  .quiz-container {
-    justify-content: center;
-    height: min-content;
-    width: 300px;
-  }
-  
-  .button-container {
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    width: 300px;
-  }
-
-  .buttons, .play-again-button {
-    width: 150px;
-    height: 50px;
-    padding: 5px 10px;
-    margin: 10px 0;
-    font-size: 0.8em;
-  }
-
-  .question {
-    font-size: 15px;
-  }
-
-  .welcome {
-    font-size: 1.3em;
-  }
-
-  h1 {
-    margin-top: 20px;
-  }
-}
-
 .timer-container {
   background-color: aquamarine;
   border: none;
@@ -242,6 +192,102 @@ h2 {
 
   to {
     width: 0;
+  }
+}
+
+@media only screen and (max-width: 500px) {
+  .quiz-container {
+    justify-content: center;
+    height: min-content;
+    width: 300px;
+  }
+  
+  .button-container {
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 300px;
+  }
+
+  .question {
+    text-align: center;
+  }
+}
+
+@media only screen and (max-height: 670px) and (max-width: 500px) {
+  .quiz-container {
+    justify-content: center;
+    height: min-content;
+    width: 300px;
+  }
+  
+  .button-container {
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 300px;
+  }
+
+  .buttons, .play-again-button {
+    width: 150px;
+    height: 50px;
+    padding: 5px 10px;
+    margin: 10px 0;
+    font-size: 0.8em;
+  }
+
+  .question {
+    font-size: 15px;
+    text-align: center;
+  }
+
+  .welcome {
+    font-size: 1.3em;
+  }
+
+  h1 {
+    margin-top: 20px;
+  }
+}
+
+@media only screen and (max-width: 360px) {
+  .quiz-container {
+    justify-content: center;
+    height: min-content;
+    width: 200px;
+  }
+  
+  .button-container {
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 200px;
+  }
+
+  .buttons, .play-again-button {
+    width: 100px;
+    height: 40px;
+    padding: 2px 5px;
+    margin: 5px 0;
+    font-size: 0.6em;
+  }
+
+  .question {
+    font-size: 12px;
+    text-align: center;
+  }
+
+  .welcome {
+    font-size: 1em;
+  }
+
+  h1 {
+    margin-top: 20px;
+    font-size: 2em;
+  }
+
+  .progress-container {
+    width: 200px;
   }
 }
 
