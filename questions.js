@@ -30,12 +30,6 @@ const quizData = [
     correctAnswer: 'Grönland'
   },
   {
-    category: 'Geografi',
-    question: `Vilket land har denna flagga?<br><img src="cameroon.png" alt="Flagga" class="flag-image">`,
-    options: ['Kenya', 'Algeriet', 'Kamerun', 'Ghana'],
-    correctAnswer: 'Kamerun'
-  },
-  {
     category: 'Vetenskap',
     question: 'Vad har guld för kemisk beteckning?',
     options: ['Ag', 'Li', 'Au', 'O'],

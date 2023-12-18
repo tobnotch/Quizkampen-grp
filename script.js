@@ -236,7 +236,7 @@ function endQuiz() {
   resetHighscore.innerText = 'Återställ highscore';
   resetHighscore.addEventListener('click', () => {
   localStorage.removeItem(`${selectedCategory}-highscore`);
-  });
+*  });
   buttonContainer.appendChild(resetHighscore);
 }
 
