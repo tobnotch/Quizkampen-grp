@@ -131,6 +131,10 @@ function handleTimeout(correctAnswer) {
       showQuestion();
     }, 1000);
   }
+  document.querySelectorAll('.buttons').forEach(button => {
+    button.disabled = true;
+    button.classList.add('disabled');
+  }); 
 }
 
 function checkAnswer(selectedOption, correctAnswer) {
