@@ -30,33 +30,7 @@ const state = {
     }
 }
 
-let history = [];
-const imgTest = new Question("Jättelång frågetext för att se vad som händer om man har jättemycket text i frågan. Kan vi hantera det eller vad är max?",
-                             "Lützen", ["Lützen", "Narva", "Breitenfeld", "Lund"], "image", "Slaget vid Lützen", "https://shorturl.at/vKWZ1");
-history.push(imgTest);
-history.push(new Question("Jättelång frågetext för att se vad som händer om man har jättemycket text i frågan. Kan vi hantera det eller vad är max?", "Karl XII", ["Karl XII", "Karl XI", "Gustav Vasa", "Oscar II"], "text"))
-
-let geography = [];
-geography.push(new Question("Fråga om geografi. Vad är svaret?", "Ja", ["Ja", "Nej", "Kanske", "Va?"]));
-geography.push(new Question("Fråga om geografi. Vad är svaret?", "Ja", ["Ja", "Nej", "Kanske", "Va?"]));
-
-
-let science = [];
-science.push(new Question("Fråga om vetenskap. Vad är en bäver?", "Bäver", ["Bäver", "Växt", "Kruka", "Vatten"]));
-science.push(new Question("Fråga om vetenskap. Vad är en bäver?", "Bäver", ["Bäver", "Växt", "Kruka", "Vatten"]));
-
-
-let sports = [];
-sports.push(new Question("Vem vann?", "Jag", ["Arsenal", "Madrid", "Jag", "Du"]));
-sports.push(new Question("Vem vann?", "Jag", ["Arsenal", "Madrid", "Jag", "Du"]));
-
-const api = [];
-
-const categoryMap = new Map();
-categoryMap.set("History", history);
-categoryMap.set("Geography", geography);
-categoryMap.set("Science", science);
-categoryMap.set("Sports", sports);
+const categories = ["History", "Geography", "Science", "Sports"];
 
 const urlMap = new Map();
 urlMap.set("History", state.historyURL);
@@ -90,13 +64,13 @@ function AddButtonEvents() {
                 button.classList.add("correct");
                 state.correctAnswers++;
                 state.answers.push("Correct");
-                AddResponseMessage("Korrekt!", true);
+                //AddResponseMessage("Korrekt!", true);
             }
             else {
                 button.classList.add("wrong");
                 document.querySelector("[data-correct]").classList.add("correct");
                 state.answers.push("Wrong");
-                AddResponseMessage("Fel svar", false);
+                //AddResponseMessage("Fel svar", false);
             }
             buttons.forEach(btn => {
                 btn.disabled = true;
@@ -114,8 +88,6 @@ async function ShowStartScreen() {
         mainContainer.classList.remove("score-screen");
     }
     mainContainer.classList.add("start-screen");
-    const categories = [];
-    categoryMap.forEach((key,value) => categories.push(value));
     
     const startScreenItems = GenerateStartScreen(categories);
     startScreenItems.forEach(item => mainContainer.appendChild(item));
@@ -267,7 +239,7 @@ function HandleTimeRanOut() {
         button.disabled = true;
     });
     state.answers.push("Wrong");
-    AddResponseMessage("Tyvärr rann tiden ut", false);
+    //AddResponseMessage("Tyvärr rann tiden ut", false);
     setTimeout(ChangeQuestion, 1000);
 }
 function AddResponseMessage(message, correct) {
