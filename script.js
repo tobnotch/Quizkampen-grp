@@ -45,7 +45,8 @@ function showCategories() {
 }
 
 function showQuestion() {
-  highscore = localStorage.getItem(`${selectedCategory}-highscore`);
+  highscore = localStorage.getItem(`${selectedCategory}-highscore`) || 0;
+  console.log(highscore);
   
   clearTimeout(timer);
   if (selectedCategory === null) {
@@ -82,12 +83,11 @@ function startTimer(duration, callback) {
   let timeRemaining = duration;
 
   const progressBar = document.querySelector('.progress-bar');
-  progressBar.style.animation = 'none'; // Reset the animation
+  progressBar.style.animation = 'none';
 
-  // Force a reflow to apply the 'none' style and avoid a flicker
   progressBar.offsetHeight;
 
-  progressBar.style.animation = `countdown ${duration}s linear`; // Set the animation with the new duration
+  progressBar.style.animation = `countdown ${duration}s linear`; 
 
   timer = setInterval(() => {
     timeRemaining--;
@@ -225,7 +225,15 @@ function endQuiz() {
   playAgainButton.addEventListener('click', () => {
     showCategories();
   });
+
   buttonContainer.appendChild(playAgainButton);
+  const resetHighscore = document.createElement('button');
+  resetHighscore.classList.add('buttons');
+  resetHighscore.innerText = 'Återställ highscore';
+  resetHighscore.addEventListener('click', () => {
+  localStorage.removeItem(`${selectedCategory}-highscore`);
+  });
+  buttonContainer.appendChild(resetHighscore);
 }
 
 updateHighscore();
