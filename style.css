@@ -173,15 +173,18 @@ h2 {
 
 .buttons.correct {
   background-color: #4CAF50; 
+  color: white;
 }
 
 .buttons.incorrect {
-  background-color: #f44336; 
+  background-color: #f44336;
+  color:white; 
 }
 
 .buttons.flash-correct {
   background-color: #4CAF50; 
   animation: flash 1s ease-in-out infinite; 
+  color: white;
 }
 
 @keyframes flash {
