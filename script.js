@@ -58,7 +58,7 @@ function showQuestion() {
 
   if (state.currentQuestionIndex < state.selectedCategoryQuestions.length) {
     const currentQuestion = state.selectedCategoryQuestions[state.currentQuestionIndex];
-    const currentBackground = backgroundsArray[0].backgrounds[state.currentQuestionIndex];
+    const currentBackground = backgroundsArray[0].backgrounds[state.currentQuestionIndex % 5];
 
     updateQuestionNumber(state.selectedCategoryQuestions.length);
 
@@ -231,3 +231,38 @@ function endQuiz() {
 
 updateHighscore();
 showCategories();
+InitializeAPIModes();
+
+//API modes below
+
+async function GetQuestionsViaApi(url) {
+    let success = false;
+    let response;
+    do {
+        response = await fetch(url);
+        success = response.ok;
+    } while (success === false)
+    const result = await response.json();
+    const arrayOutput = [];
+    result.results.forEach(item => {
+        const question = {question: item.question, options: [item.correct_answer, ...item.incorrect_answers], correctAnswer: item.correct_answer};
+        console.log(question);
+        arrayOutput.push(question);
+    })
+    state.awaitingAPI = false;
+    return arrayOutput;
+
+}
+
+function InitializeAPIModes() {
+    const endlessButton = document.querySelector("#endless");
+    const challengeButton = document.querySelector("#challenge");
+    challengeButton.addEventListener('click', StartChallenge);
+}
+
+async function StartChallenge() {
+    const URL = "https://opentdb.com/api.php?amount=50&difficulty=medium&type=multiple";
+    state.selectedCategory = "Utmaning";
+    state.selectedCategoryQuestions = await GetQuestionsViaApi(URL);
+    showQuestion();
+}
