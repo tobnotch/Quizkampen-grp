@@ -1,10 +1,12 @@
 import quizData from './questions.js';
+import backgroundsArray from './backgrounds.js';
 import RandomizeOrder from './RandomizeArray.js';
 
 const categories = ["Historia", "Sport", "Vetenskap", "Geografi"];
 
 const buttonContainer = document.querySelector('.button-container');
 const questionElement = document.querySelector('.question');
+const bodyElement = document.querySelector('body');
 const welcomeElement = document.querySelector('.welcome');
 const progressContainer = document.querySelector('.progress-container');
 const progressBar = document.querySelector('.progress-bar');
@@ -21,6 +23,7 @@ const state = {
 
 
 function showCategories() {
+  bodyElement.style.backgroundColor = "#92c5ff";
   buttonContainer.innerHTML = '';
   welcomeElement.innerHTML = 'Välkommen'
   document.querySelector('.question').innerHTML = 'Välj kategori';
@@ -54,10 +57,12 @@ function showQuestion() {
 
   if (state.currentQuestionIndex < state.selectedCategoryQuestions.length) {
     const currentQuestion = state.selectedCategoryQuestions[state.currentQuestionIndex];
+    const currentBackground = backgroundsArray[0].backgrounds[state.currentQuestionIndex];
 
     updateQuestionNumber(state.selectedCategoryQuestions.length);
 
     questionElement.innerHTML = currentQuestion.question;
+    bodyElement.style.backgroundColor = currentBackground.text;
 
     buttonContainer.innerHTML = '';
     RandomizeOrder(currentQuestion.options).forEach(option => {
@@ -203,7 +208,7 @@ function endQuiz() {
   progressContainer.classList.add('hidden');
   buttonContainer.innerHTML = '';
   
-
+  bodyElement.style.backgroundColor = "#ffd166";
   buttonContainer.classList.add('play-again-button-container');
 
   const playAgainButton = document.createElement('button');
