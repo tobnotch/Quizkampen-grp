@@ -92,7 +92,7 @@ function startTimer(duration, callback) {
 
   state.timer = setInterval(() => {
     timeRemaining--;
-    if (timeRemaining === 0) {
+    if (timeRemaining === 0 && state.isAnswerSelected === false) {
       clearInterval(state.timer);
       callback();
     }
@@ -128,7 +128,7 @@ function checkAnswer(selectedOption, correctAnswer) {
   }
 
   state.isAnswerSelected = true; 
-
+  progressBar.style.animationPlayState = "paused";
   const isCorrect = selectedOption.innerText === correctAnswer;
 
   selectedOption.classList.add(isCorrect ? 'correct' : 'incorrect');
