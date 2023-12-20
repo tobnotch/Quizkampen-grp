@@ -48,7 +48,6 @@ function showCategories() {
 
 function showQuestion() {
   state.highscore = localStorage.getItem(`${state.selectedCategory}-highscore`) || 0;
-  console.log(state.highscore);
   
   clearTimeout(state.timer);
   if (state.selectedCategory === null) {
