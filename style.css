@@ -55,7 +55,7 @@ h2 {
   
 }
 
-.question {
+.question, .challenges-text {
   border-top: 1px solid #c8e5ff;
   border-bottom: 1px solid #c8e5ff;
   padding: 15px 20px;
@@ -193,6 +193,18 @@ h2 {
   to {
     width: 0;
   }
+}
+
+.lives {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+  gap: 15px;
+}
+.lives img {
+  width: 30px;
+  height: 30px;
 }
 
 @media only screen and (max-width: 500px) {

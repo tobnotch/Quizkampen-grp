@@ -1,6 +1,6 @@
-import quizData from './questions.js';
-import backgroundsArray from './backgrounds.js';
-import RandomizeOrder from './RandomizeArray.js';
+import quizData from './Modules/questions.js';
+import backgroundsArray from './Modules/backgrounds.js';
+import RandomizeOrder from './Modules/RandomizeArray.js';
 
 const categories = ["Historia", "Sport", "Vetenskap", "Geografi"];
 
@@ -20,6 +20,8 @@ const state = {
   timer: undefined,
   highscore: 0,
   lives: 5,
+  maxLives: 5,
+  mode: "classic",
 }
 
 
@@ -36,7 +38,8 @@ function showCategories() {
     button.addEventListener('click', () => {
       state.selectedCategory = category;
       const retrievedQuestions = quizData.filter(q => q.category === state.selectedCategory);
-      state.selectedCategoryQuestions = RandomizeOrder(retrievedQuestions);    
+      state.selectedCategoryQuestions = RandomizeOrder(retrievedQuestions); 
+      HideChallengeModes();  
       showQuestion();
     });
     buttonContainer.appendChild(button);
@@ -46,7 +49,7 @@ function showCategories() {
 
 }
 
-function showQuestion() {
+async function showQuestion() {
   state.highscore = localStorage.getItem(`${state.selectedCategory}-highscore`) || 0;
   
   clearTimeout(state.timer);
@@ -54,31 +57,52 @@ function showQuestion() {
     console.error('No category selected.');
     return;
   }
-
-  if (state.currentQuestionIndex < state.selectedCategoryQuestions.length) {
-    const currentQuestion = state.selectedCategoryQuestions[state.currentQuestionIndex];
-    const currentBackground = backgroundsArray[0].backgrounds[state.currentQuestionIndex % 5];
-
-    updateQuestionNumber(state.selectedCategoryQuestions.length);
-
-    questionElement.innerHTML = currentQuestion.question;
-    bodyElement.style.backgroundColor = currentBackground.text;
-
-    buttonContainer.innerHTML = '';
-    RandomizeOrder(currentQuestion.options).forEach(option => {
-      const button = document.createElement('button');
-      button.classList.add('buttons');
-      button.innerText = option;
-      button.addEventListener('click', () => checkAnswer(button, currentQuestion.correctAnswer));
-      buttonContainer.appendChild(button);
-    });
-
-    progressContainer.classList.remove('hidden');
-    startTimer(5, () => handleTimeout(currentQuestion.correctAnswer));
-
-  } else {
+  //Om antalet liv är slut så avslutas quizzet.
+  if (state.lives === 0) {
+    
     endQuiz();
+    return;
   }
+  //Om endless är valt och frågorna är slut laddas nya frågor in. 
+  else if (state.mode === "endless" 
+           && state.currentQuestionIndex === state.selectedCategoryQuestions.length) {
+    state.selectedCategoryQuestions = GetQuestionsViaApi();
+    state.currentQuestionIndex = 0;
+  }
+
+
+  if (state.currentQuestionIndex >= state.selectedCategoryQuestions.length) {
+    endQuiz();
+    return;
+  }
+
+  const currentQuestion = state.selectedCategoryQuestions[state.currentQuestionIndex];
+  const currentBackground = backgroundsArray[0].backgrounds[state.currentQuestionIndex % 5];
+
+  //Om endless är valt så uppdateras antalet hjärtan, annars uppdateras frågenumret
+  if (state.mode === "endless") {
+    UpdateHearts();
+  }
+  else {
+    updateQuestionNumber(state.selectedCategoryQuestions.length);
+  }
+  
+
+  questionElement.innerHTML = currentQuestion.question;
+  bodyElement.style.backgroundColor = currentBackground.text;
+
+  buttonContainer.innerHTML = '';
+  RandomizeOrder(currentQuestion.options).forEach(option => {
+    const button = document.createElement('button');
+    button.classList.add('buttons');
+    button.innerText = option;
+    button.addEventListener('click', () => checkAnswer(button, currentQuestion.correctAnswer));
+    buttonContainer.appendChild(button);
+  });
+
+  progressContainer.classList.remove('hidden');
+  startTimer(5, () => handleTimeout(currentQuestion.correctAnswer));
+
 }
 
 function startTimer(duration, callback) {
@@ -144,6 +168,12 @@ function checkAnswer(selectedOption, correctAnswer) {
       button.innerText === correctAnswer
     );
 
+    //Om endless är valt så reduceras antalet liv och uppdaterar antalet på skärmen.
+    if (state.mode === "endless") {
+      state.lives--;
+      UpdateHearts();
+    }
+
     if (correctOptionButton) {
       correctOptionButton.classList.add('flash-correct');
       setTimeout(() => {
@@ -194,8 +224,12 @@ function updateQuestionNumber(totalQuestions) {
 function resetGame() {
   state.currentQuestionIndex = 0;
   state.score = 0;
+  state.mode = "classic";
+  state.lives = 5;
   state.selectedCategory = null;
   state.selectedCategoryQuestions = [];
+  ShowChallengeModes();
+  
   clearTimeout(state.timer);
   document.querySelector('.timer-container').classList.add('hidden');
 }
@@ -234,7 +268,8 @@ InitializeAPIModes();
 
 //API modes below
 
-async function GetQuestionsViaApi(url) {
+async function GetQuestionsViaApi() {
+    const url = "https://opentdb.com/api.php?amount=10&difficulty=medium&type=multiple";
     let success = false;
     let response;
     do {
@@ -245,11 +280,19 @@ async function GetQuestionsViaApi(url) {
     const arrayOutput = [];
     result.results.forEach(item => {
         const question = {question: item.question, options: [item.correct_answer, ...item.incorrect_answers], correctAnswer: item.correct_answer};
-        console.log(question);
         arrayOutput.push(question);
     })
     state.awaitingAPI = false;
     return arrayOutput;
+
+}
+function HideChallengeModes() {
+  const challengeElements = document.querySelectorAll(".challenges");
+  challengeElements.forEach(el => el.classList.add("hidden"));
+}
+function ShowChallengeModes() {
+  const challengeElements = document.querySelectorAll(".challenges");
+  challengeElements.forEach(el => el.classList.remove("hidden"));
 
 }
 
@@ -257,11 +300,41 @@ function InitializeAPIModes() {
     const endlessButton = document.querySelector("#endless");
     const challengeButton = document.querySelector("#challenge");
     challengeButton.addEventListener('click', StartChallenge);
+    endlessButton.addEventListener("click", StartEndless);
 }
 
 async function StartChallenge() {
-    const URL = "https://opentdb.com/api.php?amount=50&difficulty=medium&type=multiple";
     state.selectedCategory = "Utmaning";
-    state.selectedCategoryQuestions = await GetQuestionsViaApi(URL);
+    state.mode = "challenge";
+    HideChallengeModes()
+    state.selectedCategoryQuestions = await GetQuestionsViaApi();
     showQuestion();
+}
+
+async function StartEndless() {
+  state.selectedCategory = "Oändlig";
+  state.mode = "endless";
+  HideChallengeModes()
+  state.selectedCategoryQuestions = await GetQuestionsViaApi();
+  showQuestion();
+}
+
+function UpdateHearts() {
+  const heartImage = "./Images/heart.png";
+  const emptyHeartImage = "./Images/heart_empty.png";
+  welcomeElement.innerHTML = "";
+  welcomeElement.classList.add("lives");
+  
+  for (let i = 0; i < state.lives; i++) {
+    const img = document.createElement("img");
+    img.src = heartImage;
+    img.alt = "Heart icon";
+    welcomeElement.appendChild(img)
+  }
+  for (let i = 0; i < state.maxLives - state.lives; i++ ) {
+    const img = document.createElement("img");
+    img.src = emptyHeartImage;
+    img.alt = "Empty heart icon";
+    welcomeElement.appendChild(img)
+  }
 }
