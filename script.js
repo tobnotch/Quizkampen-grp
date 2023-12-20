@@ -56,12 +56,12 @@ function showQuestion() {
 
   if (state.currentQuestionIndex < state.selectedCategoryQuestions.length) {
     const currentQuestion = state.selectedCategoryQuestions[state.currentQuestionIndex];
-    const currentBackground = backgroundsArray[0].backgrounds[state.currentQuestionIndex];
+    const currentBackground = backgroundsArray[state.currentQuestionIndex];
 
     updateQuestionNumber(state.selectedCategoryQuestions.length);
 
     questionElement.innerHTML = currentQuestion.question;
-    bodyElement.style.backgroundColor = currentBackground.text;
+    bodyElement.style.backgroundColor = currentBackground;
 
     buttonContainer.innerHTML = '';
     RandomizeOrder(currentQuestion.options).forEach(option => {
