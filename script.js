@@ -11,6 +11,10 @@ const welcomeElement = document.querySelector('.welcome');
 const progressContainer = document.querySelector('.progress-container');
 const progressBar = document.querySelector('.progress-bar');
 
+//La till lives, maxLives, mode & duration. 
+//Lives och maxLives används för endless mode. 
+//Mode används för att kunna särskilja vilket mode som körs. 
+//Duration för att enkelt kunna justera hur lång tid spelaren har på sig. 
 const state = {
   currentQuestionIndex: 0,
   score: 0,
@@ -22,6 +26,7 @@ const state = {
   lives: 5,
   maxLives: 5,
   mode: "classic",
+  duration: 5,
 }
 
 
@@ -39,6 +44,7 @@ function showCategories() {
       state.selectedCategory = category;
       const retrievedQuestions = quizData.filter(q => q.category === state.selectedCategory);
       state.selectedCategoryQuestions = RandomizeOrder(retrievedQuestions); 
+      //La till HideChallengeModes för att gömma extraknapparna. 
       HideChallengeModes();  
       showQuestion();
     });
@@ -73,7 +79,7 @@ async function showQuestion() {
     state.currentQuestionIndex = 0;
   }
 
-
+  //skrev om denna sektion så att om det är slut på frågor så avslutas quizzen, annars körs koden nedan. 
   if (state.currentQuestionIndex >= state.selectedCategoryQuestions.length) {
     endQuiz();
     return;
@@ -104,7 +110,7 @@ async function showQuestion() {
   });
 
   progressContainer.classList.remove('hidden');
-  startTimer(5, () => handleTimeout(currentQuestion.correctAnswer));
+  startTimer(state.duration, () => handleTimeout(currentQuestion.correctAnswer));
 
 }
 
@@ -134,6 +140,11 @@ function handleTimeout(correctAnswer) {
     button.innerText === correctAnswer
   );
 
+  //Lagt till så att ett liv försvinner om man inte svarar i tid. 
+  if (state.mode === "endless") {
+    state.lives--;
+    UpdateHearts();
+  }
   if (correctOptionButton) {
     correctOptionButton.classList.add('flash-correct');
 
@@ -224,12 +235,14 @@ function updateQuestionNumber(totalQuestions) {
   }
 }
 
+//Lagt till så att de nya properties i state objektet återställs som det ska. 
 function resetGame() {
   state.currentQuestionIndex = 0;
   state.score = 0;
   state.mode = "classic";
   state.lives = 5;
   state.selectedCategory = null;
+  state.duration = 5;
   state.selectedCategoryQuestions = [];
   ShowChallengeModes();
   
@@ -270,13 +283,15 @@ showCategories();
 InitializeAPIModes();
 
 //API modes nedanför
+// <-------------------------------------------------------------------------------->
 
-//Denna metod hämtar in data från ett api som gjorts tillgängligt av Open Trivia Database. 
+//Denna metod hämtar in data från ett api som gjorts tillgängligt av the Trivia API. 
 //För att kunna hämta data från en annan server behöver vi invänta serverns svar innan vi går vidare, därav async och await. 
-//Använda en do while loop för att hämta datan utifall att apin fick ett fel av något slag. 
+//Använder en do while loop i detta fall för att hämta datan utifall att apin fårr ett fel av något slag - Om det blir fel så testar den igen.
 //Efter datan hämtats in omvandlas den till det format som resten av koden behöver för att fungera. 
+
 async function GetQuestionsViaApi(num = 10) {
-    const url = `https://opentdb.com/api.php?amount=${num}&difficulty=medium&type=multiple`;
+    const url = `https://the-trivia-api.com/v2/questions?limit=${num}`;
     let success = false;
     let response;
     do {
@@ -285,12 +300,14 @@ async function GetQuestionsViaApi(num = 10) {
     } while (success === false)
     const result = await response.json();
     const arrayOutput = [];
-    result.results.forEach(item => {
-        const question = {question: item.question, options: [item.correct_answer, ...item.incorrect_answers], correctAnswer: item.correct_answer};
+    result.forEach(item => {
+        const question = {question: item.question.text, options: [item.correctAnswer, ...item.incorrectAnswers], correctAnswer: item.correctAnswer};
         arrayOutput.push(question);
     })
     return arrayOutput;
+  
 }
+
 function HideChallengeModes() {
   const challengeElements = document.querySelectorAll(".challenges");
   challengeElements.forEach(el => el.classList.add("hidden"));
@@ -301,6 +318,7 @@ function ShowChallengeModes() {
 
 }
 
+//Lägger till klickevent på de två knapparna endless och challenge. 
 function InitializeAPIModes() {
     const endlessButton = document.querySelector("#endless");
     const challengeButton = document.querySelector("#challenge");
@@ -308,22 +326,27 @@ function InitializeAPIModes() {
     endlessButton.addEventListener("click", StartEndless);
 }
 
+//Sätter kategori till utmaning, ökar tiden och hämtar femtio frågor från API. Sedan startar koden som vanligt. 
 async function StartChallenge() {
     state.selectedCategory = "Utmaning";
     state.mode = "challenge";
+    state.duration = 10;
     HideChallengeModes()
     state.selectedCategoryQuestions = await GetQuestionsViaApi(50);
     showQuestion();
 }
 
+//Sätter kategori till oändlig, ökar tiden och hämtar tio frågor från API. Sedan startar koden som vanligt. 
 async function StartEndless() {
   state.selectedCategory = "Oändlig";
   state.mode = "endless";
+  state.duration = 10;
   HideChallengeModes()
   state.selectedCategoryQuestions = await GetQuestionsViaApi();
   showQuestion();
 }
 
+//Denna metod körs istället för UpdateQuestionNumber. Den lägger till fem hjärtan där frågenumret annars skulle finnas. 
 function UpdateHearts() {
   const heartImage = "./Images/heart.png";
   const emptyHeartImage = "./Images/heart_empty.png";
