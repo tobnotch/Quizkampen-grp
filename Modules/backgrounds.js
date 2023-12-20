@@ -1,13 +1,3 @@
-const backgroundsArray = [
-    {
-        backgrounds: [
-            {text: "#588157"},
-            {text: "#219ebc"},
-            {text: "#e9c46a"},
-            {text: "#d4a373"},
-            {text: "#f28482"},
-        ]
-    }
-];
+const backgroundsArray = ["#588157", "#219ebc", "#e9c46a", "#d4a373", "#f28482"];
 
 export default backgroundsArray;

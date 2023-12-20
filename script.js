@@ -49,6 +49,9 @@ function showCategories() {
 
 }
 
+//Lagt till nyckelordet async. Detta för att kunna använda nyckelordet await senare i koden. 
+//Vad await gör är att den inväntar det fullständiga svaret från GetQuestionsViaApi innan den går vidare. 
+//Utan den hade koden inte fungerat. 
 async function showQuestion() {
   state.highscore = localStorage.getItem(`${state.selectedCategory}-highscore`) || 0;
   
@@ -66,7 +69,7 @@ async function showQuestion() {
   //Om endless är valt och frågorna är slut laddas nya frågor in. 
   else if (state.mode === "endless" 
            && state.currentQuestionIndex === state.selectedCategoryQuestions.length) {
-    state.selectedCategoryQuestions = GetQuestionsViaApi();
+    state.selectedCategoryQuestions = await GetQuestionsViaApi();
     state.currentQuestionIndex = 0;
   }
 
@@ -77,7 +80,7 @@ async function showQuestion() {
   }
 
   const currentQuestion = state.selectedCategoryQuestions[state.currentQuestionIndex];
-  const currentBackground = backgroundsArray[0].backgrounds[state.currentQuestionIndex % 5];
+  const currentBackground = backgroundsArray[state.currentQuestionIndex % 5];
 
   //Om endless är valt så uppdateras antalet hjärtan, annars uppdateras frågenumret
   if (state.mode === "endless") {
@@ -89,7 +92,7 @@ async function showQuestion() {
   
 
   questionElement.innerHTML = currentQuestion.question;
-  bodyElement.style.backgroundColor = currentBackground.text;
+  bodyElement.style.backgroundColor = currentBackground;
 
   buttonContainer.innerHTML = '';
   RandomizeOrder(currentQuestion.options).forEach(option => {
@@ -266,10 +269,14 @@ updateHighscore();
 showCategories();
 InitializeAPIModes();
 
-//API modes below
+//API modes nedanför
 
-async function GetQuestionsViaApi() {
-    const url = "https://opentdb.com/api.php?amount=10&difficulty=medium&type=multiple";
+//Denna metod hämtar in data från ett api som gjorts tillgängligt av Open Trivia Database. 
+//För att kunna hämta data från en annan server behöver vi invänta serverns svar innan vi går vidare, därav async och await. 
+//Använda en do while loop för att hämta datan utifall att apin fick ett fel av något slag. 
+//Efter datan hämtats in omvandlas den till det format som resten av koden behöver för att fungera. 
+async function GetQuestionsViaApi(num = 10) {
+    const url = `https://opentdb.com/api.php?amount=${num}&difficulty=medium&type=multiple`;
     let success = false;
     let response;
     do {
@@ -282,9 +289,7 @@ async function GetQuestionsViaApi() {
         const question = {question: item.question, options: [item.correct_answer, ...item.incorrect_answers], correctAnswer: item.correct_answer};
         arrayOutput.push(question);
     })
-    state.awaitingAPI = false;
     return arrayOutput;
-
 }
 function HideChallengeModes() {
   const challengeElements = document.querySelectorAll(".challenges");
@@ -307,7 +312,7 @@ async function StartChallenge() {
     state.selectedCategory = "Utmaning";
     state.mode = "challenge";
     HideChallengeModes()
-    state.selectedCategoryQuestions = await GetQuestionsViaApi();
+    state.selectedCategoryQuestions = await GetQuestionsViaApi(50);
     showQuestion();
 }
 
